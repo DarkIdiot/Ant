@@ -1,0 +1,9 @@
+Testsuite: com.dark.ant.TestHelloWorld
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.027 sec
+
+Testcase: testReturnNotNull took 0.002 sec
+Testcase: testException took 0 sec
+Testcase: testTime took 1.002 sec
+Testcase: TestWorld took 0 sec
+Testcase: TestHello took 0 sec
+Testcase: testReturnNull took 0.001 sec

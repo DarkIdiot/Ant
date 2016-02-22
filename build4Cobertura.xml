@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="cobertura.junit.report" default="coverage" basedir=".">
+  <!-- 这是一个JavaProject,目录结构属很典型的,即src下存放应用代码,test下存放测试代码,bin下存放应用代码和测试代码的class文件 -->
+  <property name="dir.lib" location="lib"/>
+  <property name="dir.src" location="src"/>
+  <property name="dir.test" location="test"/>
+  <!-- 将生成测试覆盖率报告的有关文件都统一放到report目录下 -->
+  <property name="dir.report" location="report"/>
+  <!-- 将生成测试覆盖率报告时所生成的JUnit测试报告也统一放到report目录下 -->
+  <property name="dir.report.junit" location="report/junit"/>
+  <!-- 将生成测试覆盖率报告所需的应用代码和测试代码的class也统一放到report目录下 -->
+  <property name="dir.report.class" location="report/class"/>
+  <!-- 存放测试覆盖率报告结果的目录,最后浏览该目录下的index.html就能看到报告了 -->
+  <property name="dir.report.result" location="report/result"/>
+  <!-- 用于存放生成测试覆盖率报告时所需的被Cobertura标记过的应用代码class文件的目录 -->
+  <property name="dir.report.instrument" location="report/instrument"/>
+  
+  <!-- 指明下面<javac/>时需用到的jar包,这里最基本的需要用到下面6个jar -->
+  <!-- junit-4.10.jar -->
+  <!-- cobertura.jar(取自下载到的cobertura-1.9.4.1-bin.zip) -->
+  <!-- asm-3.0(取自下载到的cobertura-1.9.4.1-bin.zip中的lib目录) -->
+  <!-- asm-tree-3.0(取自下载到的cobertura-1.9.4.1-bin.zip中的lib目录) -->
+  <!-- jakarta-oro-2.0.8(取自下载到的cobertura-1.9.4.1-bin.zip中的lib目录) -->
+  <!-- log4j-1.2.9(取自下载到的cobertura-1.9.4.1-bin.zip中的lib目录) -->
+  <path id="app.classpath">
+    <fileset dir="${dir.lib}">
+      <include name="*.jar"/>
+    </fileset>
+  </path>
+  
+  <!-- 配置Cobatura ant扩展任务(其实这个tasks.properties是位于lib/cobertura.jar中的) -->
+  <taskdef classpathref="app.classpath" resource="tasks.properties"/>
+  
+  <target name="init">
+    <delete dir="${dir.report}"/>
+    <mkdir dir="${dir.report.junit}"/>
+    <mkdir dir="${dir.report.class}"/>
+    <mkdir dir="${dir.report.instrument}"/>
+  </target>
+  
+  <!-- 同时编译应用代码和测试代码 -->
+  <target name="compile" depends="init">
+    <javac srcdir="${dir.src}:${dir.test}" destdir="${dir.report.class}" debug="true" encoding="GBK">
+    	<!-- <compilerarg line="-encoding GBK"/> -->
+      <classpath refid="app.classpath"/>
+    </javac>
+  </target>
+  
+  <!-- 生成测试覆盖率报告(期间会进行JUnit测试) -->
+  <target name="coverage" depends="compile">
+    <cobertura-instrument todir="${dir.report.instrument}">
+      <ignore regex="org.apache.log4j.*"/> 
+      <!-- 指定需要生成代码覆盖率报告的class -->
+      <fileset dir="${dir.report.class}">
+        <include name="**/**.class"/>
+        <exclude name="**/Test*.class"/>
+      </fileset>
+    </cobertura-instrument>
+    <!-- printsummary表示是否打印基本信息,haltonfailure表示测试失败是否中止,fork必须启用,可设置为"on,true,yes"等-->
+    <junit printsummary="on" haltonerror="true" haltonfailure="true" fork="on">
+      <!-- instrumented classes should be before the original (uninstrumented) classes -->
+    	<!-- 使用下面classpath会导致编译失败 -->
+      <!-- <classpath location="${dir.report.instrument}"/> --> 
+      <classpath location="${dir.report.class}"/>
+      <classpath refid="app.classpath"/>
+      <!-- 同时运行多个测试用例,todir用来存放测试的输出结果,如果不指定<formatter/>是不会输出结果到todir中的 -->
+      <formatter type="plain"/>
+      <batchtest todir="${dir.report.junit}">
+        <fileset dir="${dir.report.class}">
+          <include name="**/Test*.class"/>
+        </fileset>
+      </batchtest>
+    </junit>
+    <!-- srcdir指定被测试的Java源码目录,destdir指定存放生成的报告的目录(默认就会生成html格式的报告) -->
+    <cobertura-report srcdir="${dir.src}" destdir="${dir.report.result}"/>
+    <!-- 最后将ser文件统一备份到报告目录中(默认的会在build.xml的同一目录下生成cobertura.ser) -->
+    <move file="cobertura.ser" todir="${dir.report}"/>
+  </target>
+</project>

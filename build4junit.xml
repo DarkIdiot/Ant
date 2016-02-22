@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="junit-test" default="run-test">
+	<property name="dir.src" location="src" />
+	<property name="dir.test" location="test" />
+	<property name="dir.lib" location="lib" />
+	<property name="dir.build" location="build" />
+	<property name="dir.build.classes" location="${dir.build}/classes" />
+	<property name="dir.build.report" location="${dir.build}/report" />
+	<property name="dir.build.test" location="${dir.build}/test" />
+	<property name="dir.build.test.classes" location="${dir.test}/classes" />
+	<property name="run-test.class" value="com.dark.ant.TestSuit" />
+	<property name="run-test.classes" value="**/Test*.class" />
+	<path id="compile-path">
+		<fileset dir="${dir.lib}">
+			<include name="**.*.jar" />
+		</fileset>
+	</path>
+
+	<path id="test-compile-path">
+		<path refid="compile-path" />
+		<pathelement location="${dir.build.classes}" />
+	</path>
+
+	<path id="run-test-path">
+		<path refid="test-compile-path">
+		</path>
+		<pathelement location="${dir.build.test.classes}" />
+	</path>
+
+	<target name="clean">
+		<delete dir="${dir.build}">
+		</delete>
+	</target>
+
+	<target name="init" depends="clean">
+		<mkdir dir="${dir.build}" />
+		<mkdir dir="${dir.build.report}" />
+		<mkdir dir="${dir.build.test}" />
+		<mkdir dir="${dir.build.test.classes}" />
+		<mkdir dir="${dir.build.classes}" />
+	</target>
+
+	<presetdef name="javac">
+		<javac includeantruntime="false" encoding="GBK" failonerror="true">
+		</javac>
+	</presetdef>
+
+	<target name="compile-src" depends="init">
+		<javac srcdir="${dir.src}" destdir="${dir.build.classes}" classpathref="compile-path" encoding="GBK">
+		</javac>
+
+	</target>
+
+	<target name="complie-test" depends="compile-src">
+		<javac srcdir="${dir.test}" destdir="${dir.build.test.classes}" classpathref="test-compile-path" encoding="GBK">
+		</javac>
+	</target>
+
+	<target name="run-test" depends="complie-test">
+		<junit printsummary="true" haltonfailure="true" haltonerror="true" fork="on">
+			<classpath refid="run-test-path" />
+			<formatter type="brief" usefile="false" />
+			<formatter type="xml" />
+			<batchtest todir="${dir.build.report}">
+				<fileset dir="${dir.build.test.classes}" includes="${run-test.classes}" />
+			</batchtest>
+			<!-- <test name="${run-test.class}"></test> 
+			<test name="com.dark.cobertura.TestUserService"></test> -->
+			<!--
+			<batchtest>
+				<fileset dir="${dir.build.test.classes}" includes="${run-test.classes}" />
+			</batchtest>
+			-->
+		</junit>
+		<junitreport todir="${dir.build.report}" >
+			<report format="frames" todir="${dir.build.report}/html" />
+			<fileset dir="${dir.build.report}" includes="TEST-*.xml"/>
+		</junitreport>
+	</target>
+
+
+</project>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="execute">
+	<!-- fileset可以设定一组文件集来进行操作 -->
+	<fileset id="src.path" dir="src" includes="**/*.java" />
+	<target name="init">
+		<delete dir="build" />
+		<mkdir dir="build" />
+		<mkdir dir="src" />
+		<mkdir dir="build/src" />
+		<mkdir dir="build/dist" />
+		<mkdir dir="build/classes" />
+	</target>
+	<target name="copySrc" depends="init">
+		<copy todir="build/src">
+			<fileset dir="src" includes="**/*.java" excludes="**/Test*.java" />
+		</copy>
+	</target>
+	<!-- 
+	<target name="copySrc" depends="init">
+		<copy todir="build/src">
+			<fileset  refid="src.path"/>
+		</copy>
+	</target> 
+	-->
+	<target name="compile" depends="copySrc">
+		<javac destdir="build/classes" srcdir="src" />
+	</target>
+	<target name="jar" depends="compile">
+		<jar destfile="build/dist/hello.jar" basedir="build/classes">
+			<manifest>
+				<attribute name="Main-Class" value="com.dark.ant.test.HelloWorld" />
+				<attribute name="author" value="DarkIdiot" />
+			</manifest>
+		</jar>
+	</target>
+	<target name="execute" depends="jar,compile">
+		<echo>基于类路径的classname来完成执行</echo>
+		<java classname="com.dark.ant.test.HelloWorld" classpath="build/classes">
+			<arg value="dark" />
+			<arg value="blue" />
+			<arg value="yellow" />
+			<arg value="中文" />
+		</java>
+		<echo>基于jar文件执行</echo>
+		<java jar="build/dist/hello.jar" fork="true">
+			<arg value="dark" />
+			<arg value="blue" />
+			<arg value="yellow" />
+			<arg value="中文" />
+		</java>
+	</target>
+</project>
