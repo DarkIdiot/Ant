@@ -15,7 +15,7 @@ import com.dark.ant.test.HelloWorld;
 /**
  * @author idiot
  * @version 1.0
- * @date 2015Äê12ÔÂ29ÈÕ ÉÏÎç11:53:31
+ * @date 2015å¹´12æœˆ29æ—¥ ä¸Šåˆ11:53:31
  */
 public class TestHelloWorld {
 
@@ -29,13 +29,13 @@ public class TestHelloWorld {
 	@Test
 	public void TestHello() {
 		String str = hw.hello();
-		assertEquals("²âÊÔ³É¹¦", "world", str);
+		assertEquals("æµ‹è¯•æˆåŠŸ", "world", str);
 	}
 
 	@Test
 	public void TestWorld() {
 		String str = hw.world();
-		assertEquals("²âÊÔ³É¹¦", "hello", str);
+		assertEquals("æµ‹è¯•æˆåŠŸ", "hello", str);
 	}
 
 	@Test(expected = java.lang.RuntimeException.class)

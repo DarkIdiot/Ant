@@ -3,7 +3,7 @@ package com.dark.cobertura.service.imp;
 /**
  * @author idiot
  * @version 1.0
- * @date 2015Äê12ÔÂ29ÈÕ ÏÂÎç4:13:08
+ * @date 2015å¹´12æœˆ29æ—¥ ä¸‹åˆ4:13:08
  */
 
 import java.util.HashMap;
@@ -21,7 +21,7 @@ public class UserServiceByMap implements IUserService {
 	public void add(User user) {
 		// TODO Auto-generated method stub
 		if(load(user.getUsername()) != null){
-			throw new UserException("ÓÃ»§ÃûÒÑ´æÔÚ");
+			throw new UserException("ç”¨æˆ·åå·²å­˜åœ¨");
 		}
 		us.put(user.getUsername(), user);
 	}
@@ -38,8 +38,8 @@ public class UserServiceByMap implements IUserService {
 	@Override
 	public User login(String username, String password) {
 		User u = load(username);
-		if(u==null) throw new UserException("ÓÃ»§Ãû²»´æÔÚ");
-		if(!u.getPassword().equals(password)) throw new UserException("ÓÃ»§ÃÜÂë²»ÕıÈ·");
+		if(u==null) throw new UserException("ç”¨æˆ·åä¸å­˜åœ¨");
+		if(!u.getPassword().equals(password)) throw new UserException("ç”¨æˆ·å¯†ç ä¸æ­£ç¡®");
 		return u;
 	}
 

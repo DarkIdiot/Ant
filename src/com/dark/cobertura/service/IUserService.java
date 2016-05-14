@@ -5,7 +5,7 @@ import com.dark.cobertura.model.User;
 /**
  * @author idiot
  * @version 1.0
- * @date 2015Äê12ÔÂ29ÈÕ ÏÂÎç4:07:48
+ * @date 2015å¹´12æœˆ29æ—¥ ä¸‹åˆ4:07:48
  */
 
 

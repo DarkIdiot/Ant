@@ -7,18 +7,18 @@ import org.junit.runners.Suite.SuiteClasses;
 /**
  * @author idiot
  * @version 1.0
- * @date 2015Äê12ÔÂ29ÈÕ ÏÂÎç3:59:06
+ * @date 2015å¹´12æœˆ29æ—¥ ä¸‹åˆ3:59:06
  */
-//RunWith±íÊ¾Õâ¸öÀàÊÇÒ»¸ösuiteµÄÀà
+//RunWithè¡¨ç¤ºè¿™ä¸ªç±»æ˜¯ä¸€ä¸ªsuiteçš„ç±»
 @RunWith(Suite.class)
-//ËµÃ÷Õâ¸öÀàÖÐ°üº¬ÄÄÐ©²âÊÔ×é½¨ 
+//è¯´æ˜Žè¿™ä¸ªç±»ä¸­åŒ…å«å“ªäº›æµ‹è¯•ç»„å»º 
 @SuiteClasses({ TestCalculate4Hamcrest.class, TestCalculate4Junit4.class,
 		TestHelloWorld.class})
 public class TestSuit {
 	 /* 
-     *  ²âÊÔÔ­Ôò£º 
-     *  1¡¢½¨Òé´´½¨Ò»¸ö×¨ÃÅµÄsource folder--->testÀ´±àÐ´²âÊÔÀà´úÂë 
-     *  2¡¢²âÊÔÀàµÄ°üÓ¦¸Ã±£³ÖºÍÐèÒª²âÊÔµÄÀàÒ»ÖÂ 
-     *  3¡¢²âÊÔµ¥ÔªÖÐµÄÃ¿¸ö²âÊÔ·½·¨¶¼±ØÐë¿ÉÒÔ¶ÀÁ¢Ö´ÐÐ£¬Ã»ÓÐ´ÎÐò£¬²»ÄÜÓÐÈÎºÎ»¥ÏàÒÀÀµ 
+     *  æµ‹è¯•åŽŸåˆ™ï¼š 
+     *  1ã€å»ºè®®åˆ›å»ºä¸€ä¸ªä¸“é—¨çš„source folder--->testæ¥ç¼–å†™æµ‹è¯•ç±»ä»£ç  
+     *  2ã€æµ‹è¯•ç±»çš„åŒ…åº”è¯¥ä¿æŒå’Œéœ€è¦æµ‹è¯•çš„ç±»ä¸€è‡´ 
+     *  3ã€æµ‹è¯•å•å…ƒä¸­çš„æ¯ä¸ªæµ‹è¯•æ–¹æ³•éƒ½å¿…é¡»å¯ä»¥ç‹¬ç«‹æ‰§è¡Œï¼Œæ²¡æœ‰æ¬¡åºï¼Œä¸èƒ½æœ‰ä»»ä½•äº’ç›¸ä¾èµ– 
      */  
 }

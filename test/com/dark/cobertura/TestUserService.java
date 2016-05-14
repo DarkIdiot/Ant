@@ -3,7 +3,7 @@ package com.dark.cobertura;
 /**
  * @author idiot
  * @version 1.0
- * @date 2015Äê12ÔÂ29ÈÕ ÏÂÎç4:11:09
+ * @date 2015å¹´12æœˆ29æ—¥ ä¸‹åˆ4:11:09
  */
 
 import static org.junit.Assert.assertEquals;
@@ -26,15 +26,15 @@ public class TestUserService {
 	
 	@Before
 	public void setUp(){
-		// ³õÊ¼»¯
+		// åˆå§‹åŒ–
 		us = new UserServiceByMap();
-		baseUser = new User("admin", "123", "¹ÜÀíÔ±");
+		baseUser = new User("admin", "123", "ç®¡ç†å‘˜");
 	}
 	
 	private void assertUserEquals(User u, User tu){
-		assertEquals("add·½·¨ÓĞ´íÎó!", u.getUsername(), tu.getUsername());
-		assertEquals("add·½·¨ÓĞ´íÎó!", u.getNickname(), tu.getNickname());
-		assertEquals("add·½·¨ÓĞ´íÎó!", u.getPassword(), tu.getPassword());
+		assertEquals("addæ–¹æ³•æœ‰é”™è¯¯!", u.getUsername(), tu.getUsername());
+		assertEquals("addæ–¹æ³•æœ‰é”™è¯¯!", u.getNickname(), tu.getNickname());
+		assertEquals("addæ–¹æ³•æœ‰é”™è¯¯!", u.getPassword(), tu.getPassword());
 	}
 	
 	@Test
@@ -44,7 +44,7 @@ public class TestUserService {
 		User tu = us.load("admin");
 		assertNotNull(tu);
 		assertUserEquals(u, tu);
-		//fail("Çë¼ÓÈëÌí¼ÓµÄ²âÊÔ´úÂë");
+		//fail("è¯·åŠ å…¥æ·»åŠ çš„æµ‹è¯•ä»£ç ");
 	}
 	
 	@Test(expected=UserException.class)
